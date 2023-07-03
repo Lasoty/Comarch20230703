@@ -3,6 +3,7 @@
  Revision: 0.1
  */
 using System;
+using System.ComponentModel;
 
 namespace ComarchCwiczenia
 {
@@ -20,6 +21,7 @@ namespace ComarchCwiczenia
             Console.WriteLine(" 3. Mnożenie");
             Console.WriteLine(" 4. Dzielenie");
             Console.WriteLine(" 5. Modulo");
+            Console.WriteLine(" 6. Tablice");
 
             Console.Write("Podaj pozycję menu: ");
 
@@ -46,6 +48,21 @@ namespace ComarchCwiczenia
                         break;
                     case 5:
                         Console.WriteLine($"Wynik reszty z dzielenia {x} oraz {y} to {x % y}");
+                        break;
+                    case 6:
+                        int[,] tab = new int[x, y];
+                        for (int yi = 0; yi < y; yi++)
+                        {
+                            for (int xi = 0; xi < x; xi++)
+                            {
+                                int w = new Random().Next(0, 255);
+                                tab[xi, yi] = w;
+
+                                Console.Write($"{w}\t");
+                            }
+                            Console.WriteLine();
+                        }
+
                         break;
                     default:
                         Console.WriteLine("Nieprawidłowy wybór.");
