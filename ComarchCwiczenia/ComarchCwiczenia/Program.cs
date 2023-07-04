@@ -2,8 +2,6 @@
  Author: Leszek Lewandowski
  Revision: 0.1
  */
-using System;
-using System.ComponentModel;
 
 namespace ComarchCwiczenia
 {
@@ -18,43 +16,39 @@ namespace ComarchCwiczenia
             do
             {
                 Console.Clear();
-
-                Console.WriteLine("KALKULATOR 1.0");
-
-                Console.WriteLine(" 1. Dodawanie");
-                Console.WriteLine(" 2. Odejmowanie");
-                Console.WriteLine(" 3. Mnożenie");
-                Console.WriteLine(" 4. Dzielenie");
-                Console.WriteLine(" 5. Modulo");
-                Console.WriteLine(" 6. Tablice");
+                ShowMenu();
 
                 Console.Write("Podaj pozycję menu: ");
 
                 if (int.TryParse(Console.ReadLine(), out int wybor) == true)
                 {
-                    Console.Write("Podaj x: ");
-                    int x = int.Parse(Console.ReadLine());
-                    Console.Write("Podaj y: ");
-                    int y = int.Parse(Console.ReadLine());
+                    int x, y;
+                    Calculator calc = new Calculator();
 
                     switch (wybor)
                     {
                         case 1:
-                            Console.WriteLine($"Wynik dodawania {x} oraz {y} to {x + y}");
+                            GetXY(out x, out y);
+                            Console.WriteLine($"Wynik dodawania {x} oraz {y} to {Calculator.Add(x, y)}");
                             break;
                         case 2:
-                            Console.WriteLine($"Wynik odejmowania {x} oraz {y} to {x - y}");
+                            GetXY(out x, out y);
+                            Console.WriteLine($"Wynik odejmowania {x} oraz {y} to {calc.Subtract(x ,y)}");
                             break;
                         case 3:
+                            GetXY(out x, out y);
                             Console.WriteLine($"Wynik mnożenia {x} oraz {y} to {x * y}");
                             break;
                         case 4:
+                            GetXY(out x, out y);
                             Console.WriteLine($"Wynik dzielenia {x} oraz {y} to {x / y}");
                             break;
                         case 5:
+                            GetXY(out x, out y);
                             Console.WriteLine($"Wynik reszty z dzielenia {x} oraz {y} to {x % y}");
                             break;
                         case 6:
+                            GetXY(out x, out y);
                             int[,] tab = new int[x, y];
                             for (int yi = 0; yi < y; yi++)
                             {
@@ -70,14 +64,45 @@ namespace ComarchCwiczenia
 
                             break;
                         default:
-                            Console.WriteLine("Nieprawidłowy wybór.");
+                            ShowError("Nieprawidłowy wybór.");
                             break;
                     }
+                }
+                else
+                {
+                    ShowError("Podana wartość nie jest liczbą!");
                 }
 
                 Console.Write("Czy chcesz wykonać kolejną operację? [T | n]");
                 takNie = Console.ReadKey().Key;
             } while (takNie != ConsoleKey.N);
+        }
+
+        private static void ShowError(string msg)
+        {
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine(msg);
+            Console.ResetColor();
+        }
+
+        private static void GetXY(out int x, out int y)
+        {
+            Console.Write("Podaj x: ");
+            x = int.Parse(Console.ReadLine());
+            Console.Write("Podaj y: ");
+            y = int.Parse(Console.ReadLine());
+        }
+
+        private static void ShowMenu()
+        {
+            Console.WriteLine("KALKULATOR 1.0");
+
+            Console.WriteLine(" 1. Dodawanie");
+            Console.WriteLine(" 2. Odejmowanie");
+            Console.WriteLine(" 3. Mnożenie");
+            Console.WriteLine(" 4. Dzielenie");
+            Console.WriteLine(" 5. Modulo");
+            Console.WriteLine(" 6. Tablice");
         }
     }
 }
