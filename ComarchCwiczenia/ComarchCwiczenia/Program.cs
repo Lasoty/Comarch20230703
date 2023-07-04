@@ -37,15 +37,26 @@ namespace ComarchCwiczenia
                             break;
                         case 3:
                             GetXY(out x, out y);
-                            Console.WriteLine($"Wynik mnożenia {x} oraz {y} to {x * y}");
+                            Console.WriteLine($"Wynik mnożenia {x} oraz {y} to {calc.Multiply(x, y)}");
                             break;
                         case 4:
                             GetXY(out x, out y);
-                            Console.WriteLine($"Wynik dzielenia {x} oraz {y} to {x / y}");
+                            try
+                            {
+                                Console.WriteLine($"Wynik dzielenia {x} oraz {y} to {calc.Divide(x, y)}");
+                            }
+                            catch (DivideByZeroException ex)
+                            {
+                                ShowError("Pamiętaj cholero! Nie dziel przez 0!");
+                            }
+                            catch (Exception ex) 
+                            {
+                                ShowError("Wystąpił nieprzewidziany wyjątek!");
+                            }
                             break;
                         case 5:
                             GetXY(out x, out y);
-                            Console.WriteLine($"Wynik reszty z dzielenia {x} oraz {y} to {x % y}");
+                            Console.WriteLine($"Wynik reszty z dzielenia {x} oraz {y} to {calc.Modulo(x, y)}");
                             break;
                         case 6:
                             GetXY(out x, out y);

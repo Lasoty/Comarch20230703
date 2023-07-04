@@ -24,9 +24,11 @@ namespace ComarchCwiczenia
             return x * y;
         }
 
-        public int Divide(int x, int y)
+        public float Divide(int x, int y)
         {
-            return x / y;
+            if (y == 0)
+                throw new DivideByZeroException("Próba dzielenia przez 0");
+            return (float)x / y;
         }
 
         public int Modulo(int x, int y)
