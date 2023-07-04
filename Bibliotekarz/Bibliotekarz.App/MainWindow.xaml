@@ -16,7 +16,7 @@
                 <MenuItem Header="_Import" />
                 <MenuItem Header="_Eksport" />
                 <Separator />
-                <MenuItem Header="Zam_knij" />
+                <MenuItem Click="OnCloseClick" Header="Zam_knij" />
             </MenuItem>
             <MenuItem Header="_Edycja">
                 <MenuItem Header="Dod_aj" />
@@ -33,7 +33,10 @@
             </StatusBarItem>
         </StatusBar>
         <Grid>
-            <DataGrid Margin="0,0,0,18" d:ItemsSource="{d:SampleData ItemCount=5}" />
+            <DataGrid
+                Margin="0,0,0,18"
+                d:ItemsSource="{d:SampleData ItemCount=5}"
+                ItemsSource="{Binding BookList}" />
             <TextBox
                 Width="250"
                 HorizontalAlignment="Left"
@@ -41,7 +44,7 @@
                 Text="TextBox"
                 TextWrapping="NoWrap" />
             <Button
-                Margin="255,375,0,0"
+                Margin="255,0,0,0"
                 HorizontalAlignment="Left"
                 VerticalAlignment="Bottom"
                 Content="Filtruj" />
