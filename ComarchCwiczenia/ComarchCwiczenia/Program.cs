@@ -3,6 +3,8 @@
  Revision: 0.1
  */
 
+using ComarchCwiczenia.CarSharing;
+
 namespace ComarchCwiczenia
 {
     /// <summary>
@@ -33,7 +35,7 @@ namespace ComarchCwiczenia
                             break;
                         case 2:
                             GetXY(out x, out y);
-                            Console.WriteLine($"Wynik odejmowania {x} oraz {y} to {calc.Subtract(x ,y)}");
+                            Console.WriteLine($"Wynik odejmowania {x} oraz {y} to {calc.Subtract(x, y)}");
                             break;
                         case 3:
                             GetXY(out x, out y);
@@ -49,7 +51,7 @@ namespace ComarchCwiczenia
                             {
                                 ShowError("Pamiętaj cholero! Nie dziel przez 0!");
                             }
-                            catch (Exception ex) 
+                            catch (Exception ex)
                             {
                                 ShowError("Wystąpił nieprzewidziany wyjątek!");
                             }
@@ -74,6 +76,20 @@ namespace ComarchCwiczenia
                             }
 
                             break;
+                        case 7:
+                            bool result = calc.IsToday(DayOfWeek.Friday, DateTime.Now);
+                            if (result)
+                            {
+                                Console.WriteLine("TAK! Dziś jest piątek!");
+                            }
+                            else
+                            {
+                                Console.WriteLine("Niestety, dziś jeszcze nie odpoczniesz!");
+                            }
+                            break;
+                        case 8:
+                            ZabawaAutem();
+                            break;
                         default:
                             ShowError("Nieprawidłowy wybór.");
                             break;
@@ -87,6 +103,45 @@ namespace ComarchCwiczenia
                 Console.Write("Czy chcesz wykonać kolejną operację? [T | n]");
                 takNie = Console.ReadKey().Key;
             } while (takNie != ConsoleKey.N);
+        }
+
+        private static void ZabawaAutem()
+        {
+            Car car = new Car();
+            Car car2 = car; // = new Car()
+
+            Truck truck = new Truck();
+
+            Vehicle vehicle = new Car();
+
+            //if (car != null)
+            //{
+            //    Console.Write("Podaj markę auta car1: ");
+            //    car?.SetMaker(Console.ReadLine());
+
+            //    Console.Write("Podaj markę auta car2: ");
+            //    car2?.SetMaker(Console.ReadLine());
+            //}
+
+            //if (car == car2)
+            //{
+            //    Console.WriteLine("car i car2 to ten sam obiekt");
+            //}
+            //else
+            //{
+            //    Console.WriteLine("car i car2 to różne obiekty");
+            //}
+
+            Rower rower = new Rower();
+
+            ShareCar(car);
+            ShareCar(truck);
+            ShareCar(rower);
+        }
+
+        private static void ShareCar(IAuto auto)
+        {
+            auto.SetBorrowState(true);
         }
 
         private static void ShowError(string msg)
@@ -114,6 +169,8 @@ namespace ComarchCwiczenia
             Console.WriteLine(" 4. Dzielenie");
             Console.WriteLine(" 5. Modulo");
             Console.WriteLine(" 6. Tablice");
+            Console.WriteLine(" 7. Czy dziś jest piątek?");
+            Console.WriteLine(" 8. Zabawa autem");
         }
     }
 }
