@@ -27,11 +27,8 @@ namespace Bibliotekarz.App
             DataContext = this;
         }
 
-        public BookWindow(Book editedBook) 
+        public BookWindow(Book editedBook) : this()
         {
-            InitializeComponent();
-            DataContext = this;
-
             MyBook = editedBook;
 
             if (MyBook.Borrower == null)
