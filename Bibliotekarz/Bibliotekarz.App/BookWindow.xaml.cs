@@ -1,4 +1,5 @@
-﻿using Bibliotekarz.Model.Models;
+﻿using Bibliotekarz.Model.Data;
+using Bibliotekarz.Model.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -33,7 +34,16 @@ namespace Bibliotekarz.App
 
         private void OnSaveClick(object sender, RoutedEventArgs e)
         {
+            using ApplicationDbContext dbContext = new ApplicationDbContext();
 
+            if (MyBook.IsBorrowed == false)
+                MyBook.Borrower = null;
+
+            dbContext.Books.Add(MyBook);
+            dbContext.SaveChanges();
+
+            DialogResult = true;
+            Hide();            
         }
     }
 }

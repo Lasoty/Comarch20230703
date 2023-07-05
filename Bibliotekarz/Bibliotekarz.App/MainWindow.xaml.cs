@@ -41,6 +41,7 @@ namespace Bibliotekarz.App
         {
             using ApplicationDbContext dbContext = new ApplicationDbContext();
             allBooks = dbContext.Books
+                .Include(b => b.Borrower)
                 .Where(book => book.PageCount > 10)
                 .OrderBy(book => book.Author)
                 .ThenByDescending(book => book.Title)
@@ -51,7 +52,12 @@ namespace Bibliotekarz.App
                 //Coś tam
             }
 
-            BookList = new ObservableCollection<Book>(allBooks);
+            BookList.Clear();
+
+            foreach (var item in allBooks)
+            {
+                BookList.Add(item);
+            }
         }
 
         private void InitializeDb()
@@ -122,6 +128,15 @@ namespace Bibliotekarz.App
             foreach (var item in filteredItems) 
             {
                 BookList.Add(item);
+            }
+        }
+
+        private void OnAddBookClick(object sender, RoutedEventArgs e)
+        {
+            BookWindow bookWindow = new BookWindow();
+            if (bookWindow.ShowDialog() == true)
+            {
+                RefreshData();
             }
         }
     }

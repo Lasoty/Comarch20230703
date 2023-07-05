@@ -19,7 +19,7 @@
                 <MenuItem Click="OnCloseClick" Header="Zam_knij" />
             </MenuItem>
             <MenuItem Header="_Edycja">
-                <MenuItem Header="Dod_aj" />
+                <MenuItem Header="Dod_aj" Click="OnAddBookClick" />
                 <MenuItem Header="_Edycja" />
                 <MenuItem Header="_Usuń" />
             </MenuItem>
