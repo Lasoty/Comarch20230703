@@ -20,8 +20,8 @@
             </MenuItem>
             <MenuItem Header="_Edycja">
                 <MenuItem Click="OnAddBookClick" Header="Dod_aj" />
-                <MenuItem Header="_Edycja" />
-                <MenuItem Header="_Usuń" Click="OnDeleteBookClick" />
+                <MenuItem Click="OnEditBookClick" Header="_Edycja" />
+                <MenuItem Click="OnDeleteBookClick" Header="_Usuń" />
             </MenuItem>
             <MenuItem Header="P_omoc">
                 <MenuItem Header="O programie" />

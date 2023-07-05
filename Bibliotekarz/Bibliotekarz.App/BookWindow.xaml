@@ -39,6 +39,7 @@
         </Grid.RowDefinitions>
 
         <TextBlock
+            x:Name="txtHeader"
             Grid.Column="1"
             Grid.ColumnSpan="3"
             FontSize="22"

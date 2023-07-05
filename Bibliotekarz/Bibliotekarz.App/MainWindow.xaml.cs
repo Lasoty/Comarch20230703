@@ -140,6 +140,7 @@ namespace Bibliotekarz.App
             if (bookWindow.ShowDialog() == true)
             {
                 RefreshData();
+                
             }
         }
 
@@ -152,6 +153,18 @@ namespace Bibliotekarz.App
                 dbContext.SaveChanges();
 
                 RefreshData();
+            }
+        }
+
+        private void OnEditBookClick(object sender, RoutedEventArgs e)
+        {
+            if (SelectedBook != null)
+            {
+                BookWindow bookWindow = new BookWindow(SelectedBook);
+                if (bookWindow.ShowDialog() == true)
+                {
+                    RefreshData();
+                }
             }
         }
     }
