@@ -102,7 +102,11 @@ namespace Bibliotekarz.App
         {
             string filterText = txtFilter.Text;
 
-            var filteredItems = allBooks.Where(book => book.Title.Contains(filterText, StringComparison.InvariantCultureIgnoreCase));
+            var filteredItems = allBooks
+                .Where(book => book.Title.Contains(filterText, StringComparison.InvariantCultureIgnoreCase)
+                            || book.Author.Contains(filterText, StringComparison.InvariantCultureIgnoreCase)
+                            || (book.Borrower?.FirstName.Contains(filterText, StringComparison.InvariantCultureIgnoreCase) ?? false)
+                            || (book.Borrower?.LastName.Contains(filterText, StringComparison.InvariantCultureIgnoreCase) ?? false));
 
             BookList.Clear();
 
