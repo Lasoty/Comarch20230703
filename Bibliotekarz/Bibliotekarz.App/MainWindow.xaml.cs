@@ -36,6 +36,10 @@ namespace Bibliotekarz.App
             //GenerateFakeData();
             RefreshData();
         }
+        
+        public ObservableCollection<Book> BookList { get; set; } = new();
+
+        public Book SelectedBook { get; set; }
 
         private void RefreshData()
         {
@@ -66,7 +70,6 @@ namespace Bibliotekarz.App
             dbContext.Database.Migrate();
         }
 
-        public ObservableCollection<Book> BookList { get; set; } = new();
 
         //private void GenerateFakeData()
         //{
@@ -136,6 +139,18 @@ namespace Bibliotekarz.App
             BookWindow bookWindow = new BookWindow();
             if (bookWindow.ShowDialog() == true)
             {
+                RefreshData();
+            }
+        }
+
+        private void OnDeleteBookClick(object sender, RoutedEventArgs e)
+        {
+            if (SelectedBook != null)
+            {
+                using ApplicationDbContext dbContext = new ApplicationDbContext();
+                dbContext.Books.Remove(SelectedBook);
+                dbContext.SaveChanges();
+
                 RefreshData();
             }
         }

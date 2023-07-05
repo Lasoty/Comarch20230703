@@ -19,9 +19,9 @@
                 <MenuItem Click="OnCloseClick" Header="Zam_knij" />
             </MenuItem>
             <MenuItem Header="_Edycja">
-                <MenuItem Header="Dod_aj" Click="OnAddBookClick" />
+                <MenuItem Click="OnAddBookClick" Header="Dod_aj" />
                 <MenuItem Header="_Edycja" />
-                <MenuItem Header="_Usuń" />
+                <MenuItem Header="_Usuń" Click="OnDeleteBookClick" />
             </MenuItem>
             <MenuItem Header="P_omoc">
                 <MenuItem Header="O programie" />
@@ -38,7 +38,8 @@
                 d:ItemsSource="{d:SampleData ItemCount=5}"
                 AutoGenerateColumns="False"
                 IsReadOnly="True"
-                ItemsSource="{Binding BookList}">
+                ItemsSource="{Binding BookList}"
+                SelectedItem="{Binding SelectedBook}">
                 <DataGrid.Columns>
                     <DataGridTextColumn
                         Width="3*"
@@ -62,10 +63,10 @@
                 Text=""
                 TextWrapping="NoWrap" />
             <Button
-                Click="OnFilterClick"
                 Margin="255,0,0,0"
                 HorizontalAlignment="Left"
                 VerticalAlignment="Bottom"
+                Click="OnFilterClick"
                 Content="Filtruj" />
         </Grid>
     </DockPanel>
