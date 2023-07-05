@@ -40,7 +40,16 @@ namespace Bibliotekarz.App
         private void RefreshData()
         {
             using ApplicationDbContext dbContext = new ApplicationDbContext();
-            allBooks = dbContext.Books.ToList();
+            allBooks = dbContext.Books
+                .Where(book => book.PageCount > 10)
+                .OrderBy(book => book.Author)
+                .ThenByDescending(book => book.Title)
+                .ToList();
+
+            if (dbContext.Borrowers.Any(c => c.Age < 18))
+            {
+                //Coś tam
+            }
 
             BookList = new ObservableCollection<Book>(allBooks);
         }
