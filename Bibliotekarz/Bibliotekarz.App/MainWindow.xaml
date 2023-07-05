@@ -55,12 +55,14 @@
                 </DataGrid.Columns>
             </DataGrid>
             <TextBox
+                Name="txtFilter"
                 Width="250"
                 HorizontalAlignment="Left"
                 VerticalAlignment="Bottom"
-                Text="TextBox"
+                Text=""
                 TextWrapping="NoWrap" />
             <Button
+                Click="OnFilterClick"
                 Margin="255,0,0,0"
                 HorizontalAlignment="Left"
                 VerticalAlignment="Bottom"

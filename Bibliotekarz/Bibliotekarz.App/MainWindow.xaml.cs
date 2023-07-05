@@ -24,6 +24,8 @@ namespace Bibliotekarz.App
     /// </summary>
     public partial class MainWindow : Window
     {
+        private List<Book> allBooks;
+
         public MainWindow()
         {
             InitializeComponent();
@@ -31,7 +33,16 @@ namespace Bibliotekarz.App
 
             DataContext = this;
 
-            GenerateFakeData();
+            //GenerateFakeData();
+            RefreshData();
+        }
+
+        private void RefreshData()
+        {
+            using ApplicationDbContext dbContext = new ApplicationDbContext();
+            allBooks = dbContext.Books.ToList();
+
+            BookList = new ObservableCollection<Book>(allBooks);
         }
 
         private void InitializeDb()
@@ -42,34 +53,34 @@ namespace Bibliotekarz.App
 
         public ObservableCollection<Book> BookList { get; set; } = new();
 
-        private void GenerateFakeData()
-        {
-            Book book = new Book
-            {
-                Id = 1,
-                Author = "Leszek Lewandowski",
-                Title = "Programowanie w C#",
-                PageCount = 234,
-                IsBorrowed = false
-            };
-            BookList.Add(book);
+        //private void GenerateFakeData()
+        //{
+        //    Book book = new Book
+        //    {
+        //        Id = 1,
+        //        Author = "Leszek Lewandowski",
+        //        Title = "Programowanie w C#",
+        //        PageCount = 234,
+        //        IsBorrowed = false
+        //    };
+        //    BookList.Add(book);
 
-            book = new Book
-            {
-                Id = 1,
-                Author = "John Sharp",
-                Title = "Visual Studio krok po kroku",
-                PageCount = 800,
-                IsBorrowed = true,
-                Borrower = new Customer
-                {
-                    Id = 1,
-                    FirstName = "Jan",
-                    LastName = "Kowalski"
-                }
-            };
-            BookList.Add(book);
-        }
+        //    book = new Book
+        //    {
+        //        Id = 1,
+        //        Author = "John Sharp",
+        //        Title = "Visual Studio krok po kroku",
+        //        PageCount = 800,
+        //        IsBorrowed = true,
+        //        Borrower = new Customer
+        //        {
+        //            Id = 1,
+        //            FirstName = "Jan",
+        //            LastName = "Kowalski"
+        //        }
+        //    };
+        //    BookList.Add(book);
+        //}
 
         private void OnCloseClick(object sender, RoutedEventArgs e)
         {
@@ -85,6 +96,20 @@ namespace Bibliotekarz.App
                 e.Handled = true;
             }
 
+        }
+
+        private void OnFilterClick(object sender, RoutedEventArgs e)
+        {
+            string filterText = txtFilter.Text;
+
+            var filteredItems = allBooks.Where(book => book.Title.Contains(filterText, StringComparison.InvariantCultureIgnoreCase));
+
+            BookList.Clear();
+
+            foreach (var item in filteredItems) 
+            {
+                BookList.Add(item);
+            }
         }
     }
 }
