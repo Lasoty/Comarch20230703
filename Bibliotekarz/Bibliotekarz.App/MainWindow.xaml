@@ -36,7 +36,24 @@
             <DataGrid
                 Margin="0,0,0,18"
                 d:ItemsSource="{d:SampleData ItemCount=5}"
-                ItemsSource="{Binding BookList}" />
+                AutoGenerateColumns="False"
+                IsReadOnly="True"
+                ItemsSource="{Binding BookList}">
+                <DataGrid.Columns>
+                    <DataGridTextColumn
+                        Width="3*"
+                        Binding="{Binding Title}"
+                        Header="Tytuł" />
+                    <DataGridTextColumn
+                        Width="2*"
+                        Binding="{Binding Author}"
+                        Header="Autor" />
+                    <DataGridTextColumn Binding="{Binding PageCount}" Header="Liczba stron" />
+                    <DataGridCheckBoxColumn Binding="{Binding IsBorrowed}" Header="Czy wypoż." />
+                    <DataGridTextColumn Binding="{Binding Borrower.FirstName}" Header="Imię wyp." />
+                    <DataGridTextColumn Binding="{Binding Borrower.LastName}" Header="Nazwisko wyp." />
+                </DataGrid.Columns>
+            </DataGrid>
             <TextBox
                 Width="250"
                 HorizontalAlignment="Left"
