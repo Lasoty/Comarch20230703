@@ -1,4 +1,6 @@
-﻿using Bibliotekarz.Model.Models;
+﻿using Bibliotekarz.Model.Data;
+using Bibliotekarz.Model.Models;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -25,9 +27,17 @@ namespace Bibliotekarz.App
         public MainWindow()
         {
             InitializeComponent();
+            InitializeDb();
+
             DataContext = this;
 
             GenerateFakeData();
+        }
+
+        private void InitializeDb()
+        {
+            using ApplicationDbContext dbContext = new ApplicationDbContext();
+            dbContext.Database.Migrate();
         }
 
         public ObservableCollection<Book> BookList { get; set; } = new();
